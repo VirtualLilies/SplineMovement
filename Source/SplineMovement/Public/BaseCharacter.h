@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
+class ACameraSplinePath;
+class APlayerSplinePath;
+
 UCLASS()
 class SPLINEMOVEMENT_API ABaseCharacter : public ACharacter
 {
@@ -24,19 +27,29 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void SetAmountToMove();
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Spline Movement")
+	ACameraActor* CameraReference = nullptr;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Spline Movement")
-		float AmountToMove = 0.0f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Spline Movement")
+	ACameraSplinePath* CameraSplinePath = nullptr;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Spline Movement")
-		float DistanceToMoveAlongSpline = 0.0f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Spline Movement")
+	APlayerSplinePath* PlayerSplinePath = nullptr;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Spline Movement")
-		FRotator CurrentRotation = FRotator(0.0f, 0.0f, 0.0f);
+private:
 
-	UPROPERTY(BlueprintReadWrite, Category = "Spline Movement")
-		FVector CharacterLocation = FVector(0.0f, 0.0f, 0.0f);
+	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	float AmountToMove = 0.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	float DistanceToMoveAlongSpline = 0.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	FRotator CurrentRotation = FRotator(0.0f, 0.0f, 0.0f);
+
+	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	FVector CharacterLocation = FVector(0.0f, 0.0f, 0.0f);
+
 
 	
 	

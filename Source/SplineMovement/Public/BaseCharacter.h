@@ -1,4 +1,4 @@
-	// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright C 2017 Tomasz Figas
 
 #pragma once
 
@@ -24,13 +24,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Spline Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spline Movement")
 	ACameraActor* CameraReference = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Spline Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spline Movement")
 	ACameraSplinePath* CameraSplinePath = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Spline Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spline Movement")
 	APlayerSplinePath* PlayerSplinePath = nullptr;
 
 protected:
@@ -43,16 +43,16 @@ protected:
 
 private:
 
-	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	UPROPERTY(EditDefaultsOnly, Category = "Spline Movement")
 	float AmountToMove = 0.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Spline Movement")
-	float DistanceToMoveAlongSpline = 0.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Spline Movement")
+	float DistanceToMoveAlongSpline = 0.f;
 
-	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	UPROPERTY(EditDefaultsOnly, Category = "Spline Movement")
 	FRotator CurrentRotation = FRotator(0.0f, 0.0f, 0.0f);
 
-	UPROPERTY(EditAnywhere, Category = "Spline Movement")
+	UPROPERTY(EditDefaultsOnly, Category = "Spline Movement")
 	FVector CharacterLocation = FVector(0.0f, 0.0f, 0.0f);
 
 

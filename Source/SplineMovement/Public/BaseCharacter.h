@@ -9,7 +9,7 @@
 class ACameraSplinePath;
 class APlayerSplinePath;
 
-UCLASS()
+UCLASS(Blueprintable)
 class SPLINEMOVEMENT_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -24,11 +24,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Sets character location 
-	FVector SetLocalCharacterLocation(FVector CharacterLocation);
-
-	// Set character current rotation
-	FRotator SetCurrentCharacterRotation(FRotator CurrentRotation);
+	// Sets needed location and rotation values for spline movement
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void UpdateLocationAndRotation();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spline Movement")
 	ACameraActor* CameraReference = nullptr;

@@ -56,27 +56,21 @@ void ABaseCharacter::MoveRight(float Value)
 	}
 }
 
-FVector ABaseCharacter::SetLocalCharacterLocation(FVector CharacterLocation)
+void ABaseCharacter::UpdateLocationAndRotation()
 {
 	FVector LocationAtDistance = PlayerSplinePath->PlayerSpline->GetLocationAtDistanceAlongSpline(DistanceToMoveAlongSpline, ESplineCoordinateSpace::World);
 	float LocationAtDistanceX = LocationAtDistance.X;
 	float LocationAtDistanceY = LocationAtDistance.Y;
 	FVector CapsuleLocation = GetCapsuleComponent()->USceneComponent::GetComponentLocation();
 	float CapsuleLocationZ = CapsuleLocation.Z;
-	return FVector(LocationAtDistanceX, LocationAtDistanceY, CapsuleLocationZ);
-	ABaseCharacter::SetActorLocation(CharacterLocation);
-}
-
-FRotator ABaseCharacter::SetCurrentCharacterRotation(FRotator CurrentRotation)
-{
+	FVector FinalActorLocation (LocationAtDistanceX, LocationAtDistanceY, CapsuleLocationZ);
+	ABaseCharacter::SetActorLocation(FinalActorLocation, false);
 	FRotator RotationAtDistance = CameraSplinePath->CameraSpline->GetRotationAtDistanceAlongSpline(DistanceToMoveAlongSpline, ESplineCoordinateSpace::World);
-	return FRotator(CurrentRotation);
 }
 
 void ABaseCharacter::Tick(float DeltaTime)
 {
-	SetLocalCharacterLocation(CharacterLocation);
-	UE_LOG(LogTemp, Warning, TEXT("Character Location at: %s"), *CharacterLocation.ToString());
+
 }
 
 

@@ -3,6 +3,9 @@
 
 #include "BaseCharacter.h"
 #include "Components/SplineComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "PlayerSplinePath.h"
+#include "CameraSplinePath.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
@@ -53,10 +56,30 @@ void ABaseCharacter::MoveRight(float Value)
 	}
 }
 
+FVector ABaseCharacter::SetLocalCharacterLocation(FVector CharacterLocation)
+{
+	FVector LocationAtDistance = PlayerSplinePath->PlayerSpline->GetLocationAtDistanceAlongSpline(DistanceToMoveAlongSpline, ESplineCoordinateSpace::World);
+	float LocationAtDistanceX = LocationAtDistance.X;
+	float LocationAtDistanceY = LocationAtDistance.Y;
+	FVector CapsuleLocation = GetCapsuleComponent()->USceneComponent::GetComponentLocation();
+	float CapsuleLocationZ = CapsuleLocation.Z;
+	return FVector(LocationAtDistanceX, LocationAtDistanceY, CapsuleLocationZ);
+	ABaseCharacter::SetActorLocation(CharacterLocation);
+}
+
+FRotator ABaseCharacter::SetCurrentCharacterRotation(FRotator CurrentRotation)
+{
+	FRotator RotationAtDistance = CameraSplinePath->CameraSpline->GetRotationAtDistanceAlongSpline(DistanceToMoveAlongSpline, ESplineCoordinateSpace::World);
+	return FRotator(CurrentRotation);
+}
+
 void ABaseCharacter::Tick(float DeltaTime)
 {
-
+	SetLocalCharacterLocation(CharacterLocation);
+	UE_LOG(LogTemp, Warning, TEXT("Character Location at: %s"), *CharacterLocation.ToString());
 }
+
+
 
 
 

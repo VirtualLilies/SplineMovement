@@ -17,7 +17,7 @@ class SPLINEMOVEMENT_API APlayerSplinePath : public AActor
 public:
 	APlayerSplinePath();
 
-protected:
+	UPROPERTY()
 	USplineComponent* PlayerSpline = nullptr;
 	
 	

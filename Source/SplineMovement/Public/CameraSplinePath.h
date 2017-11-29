@@ -17,7 +17,7 @@ class SPLINEMOVEMENT_API ACameraSplinePath : public AActor
 public:
 	ACameraSplinePath();
 	
-protected:
+	UPROPERTY()
 	USplineComponent* CameraSpline = nullptr;
 	
 	

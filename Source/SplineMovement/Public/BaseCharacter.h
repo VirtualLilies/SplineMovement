@@ -24,6 +24,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Sets character location 
+	FVector SetLocalCharacterLocation(FVector CharacterLocation);
+
+	// Set character current rotation
+	FRotator SetCurrentCharacterRotation(FRotator CurrentRotation);
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spline Movement")
 	ACameraActor* CameraReference = nullptr;
 
